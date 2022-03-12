@@ -5,8 +5,10 @@
 
 chrome.runtime.onMessage.addListener(gotMessage);
 function gotMessage(message, sender, sendResponse){
-  doThis();
+  console.log("background.js working");
 }
+
+window.setTimeout(doThis, 1000);
 
 function doThis() {
   var localImages = ["cat-g16c636668_640.jpg",
@@ -18,10 +20,17 @@ function doThis() {
   "cat-gffba8edca_640.jpg"];
 
   var allImages = document.getElementsByTagName('img');
+  var imgContainers = document.querySelectorAll('[style*="background-image"]');
 
-  for (var i=0; i < allImages.length; i++) {
-    var randomId = Math.floor(Math.random() * localImages.length);
-    var fileName = "images/" + localImages[randomId];
-    allImages[i].srcset = chrome.extension.getURL(fileName);
+  for (let i=0; i < allImages.length; i++) {
+    let randomId = Math.floor(Math.random() * localImages.length);
+    let fileName = "images/" + localImages[randomId];
+    allImages[i].src = chrome.extension.getURL(fileName);
+  }
+
+  for (let i=0; i < imgContainers.length; i++) {
+    let randomId = Math.floor(Math.random() * localImages.length);
+    let fileName = "images/" + localImages[randomId];
+    imgContainers[i].style.backgroundImage = `url(${ fileName2 })`;
   }
 }

@@ -49,3 +49,7 @@ function gotMessage(message, sender, sendResponse){
 "web_accessible_resources": ['file_names'], -> if u want to load an image(for example) in the extension
 
 chrome.extension.getURL(file_path) -> converts ur local file to a accessible URL, to be used by extension
+
+window.setTimeout( function, time_in_milli_seconds); -> execute the function after given_time(after the page load);
+
+
